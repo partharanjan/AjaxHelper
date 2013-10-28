@@ -26,6 +26,6 @@ How To Use
             }
             sAjax.OnException(data)
             {
-              //on error
+              //on exception
             }
             sAjax.Init();

@@ -20,11 +20,11 @@ How To Use
                     //do on success
                 }
             }
-            sAjax.OnError:function(data)
+            sAjax.OnError=function(data)
             {
               //error code
             }
-            sAjax.OnException(data)
+            sAjax.OnException=function(data)
             {
               //on exception
             }

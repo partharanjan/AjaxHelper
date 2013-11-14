@@ -1,4 +1,5 @@
 /*
+License: Free
 Author: Partha Ranjan Nayak
 AjaxHelper
 */

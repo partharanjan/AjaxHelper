@@ -5,7 +5,7 @@ Author: Partha Ranjan Nayak
 AjaxHelper
 */
 function AjaxHelper(req_url) {
-    this.Type = "POST";
+    this.Type = "GET";
     this.Async = true;
     this.Cache = false;
     this.Url = req_url;
@@ -50,7 +50,7 @@ AjaxHelper.prototype.Init = function () {
             dataType: "json",
             success: function (successData) {
                 
-                obj.OnSuccess(successData.d);
+                obj.OnSuccess(successData);
             },
             error: function (errorData) {
                 obj.OnError(errorData.d);

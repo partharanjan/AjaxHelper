@@ -1,35 +1,37 @@
 /*
-License: Free
-Date: 14-11-2013
 Author: Partha Ranjan Nayak
 AjaxHelper
+http://partha.pw
 */
 function AjaxHelper(req_url) {
     this.Type = "GET";
     this.Async = true;
     this.Cache = false;
     this.Url = req_url;
+    this.ContentType="application/json; charset=utf-8";
     this.Data = "";
+    this.DataType='json';
     this.OnSuccess = function (data) { }
     this.OnError = function (data) { }
     this.OnException = function (data) { }
     this.OnInit = function () { }
 }
-
-//set parameter
-AjaxHelper.prototype.SetParam = function (name, value) {
-    var total = name.length;
-    if (total > 0) {
-        var str = "";
-        for (var i = 0; i < total; i++) {
-            str = name[i] + ":" + value[i] + ",";
-        }
-        //remove last comma
-        str = str.substr(0, str.length - 1);
-        this.Data = "{" + str + "}";
-    }
+//set content Type
+AjaxHelper.prototype.setType=function(flag)
+{
+    if(flag=='get')
+	{
+		this.Type = "GET";
+		this.ContentType="application/json; charset=utf-8";
+	    this.DataType='json';
+	}
+    else if(flag=='post')
+	{
+		this.Type = "POST";
+		this.ContentType="application/x-www-form-urlencoded; charset=UTF-8";
+	    this.DataType='html';
+	}
 }
-
 //start ajax request
 AjaxHelper.prototype.Init = function () {
     try {
@@ -44,16 +46,15 @@ AjaxHelper.prototype.Init = function () {
             type: obj.Type,
             async: obj.Async,
             cache: obj.Cache,
-            contentType: "application/json; charset=utf-8",
+            contentType: obj.ContentType,
             url: obj.Url,
             data: obj.Data,
-            dataType: "json",
+            dataType: obj.DataType,
             success: function (successData) {
-                
                 obj.OnSuccess(successData);
             },
             error: function (errorData) {
-                obj.OnError(errorData.d);
+                obj.OnError(errorData);
             }
         });
     }
